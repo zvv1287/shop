@@ -1,0 +1,65 @@
+{% extends 'adminapp/base.html' %}
+
+{% block content %}
+    <h1 class="mt-4">Заказы</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            {{ title }}
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>ID заказа</th>
+                        <th>Имя пользователя</th>
+                        <th>Создан</th>
+                        <th>Редактирован</th>
+                        <th>Статус</th>
+                        <th>Активен?</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>ID заказа</th>
+                        <th>Имя пользователя</th>
+                        <th>Создан</th>
+                        <th>Редактирован</th>
+                        <th>Статус</th>
+                        <th>Активен?</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for item in object_list %}
+                        <tr>
+                            <td class="td1 orders_list">{{ item.pk }}</td>
+                            <td class="td1 orders_list">{{ item.user }}</td>
+                            <td>{{ item.created|date:"Y-m-d H:i:s" }}</td>
+                            <td>{{ item.updated|date:"Y-m-d H:i:s" }}</td>
+                            <td>{{ item.get_status_display }}</td>
+                            <td>{{ item.is_active }}</td>
+
+
+
+                            <td>
+                                    <a href="{% url 'adminapp:admin_order_update' item.pk %}">
+                                        редактировать
+                                    </a>
+                            </td>
+                            <td>
+                                    <a href="{% url 'ordersapp:order_delete' item.pk %}">
+                                        удалить
+                                    </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+

@@ -1,0 +1,9 @@
+{% if user %}
+    <a class="nav-link" href="{% url 'auth:profile' user.id %}">
+        {{ basket }}
+        <i class="fas fa-user-circle"></i>
+    </a>
+{% else %}
+    {{ basket }}
+    <i class="fas fa-user-circle"></i>
+{% endif %}

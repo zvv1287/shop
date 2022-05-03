@@ -1,0 +1,8 @@
+<div class="list-group">
+    <a href="{% url 'main:products' %}" class="list-group-item">Все категории</a>
+    {% for category in categories_list %}
+        <a href="{% url 'main:product' category.slug %}"
+           class="list-group-item">{{ category.name }}</a>
+    {% endfor %}
+
+</div>

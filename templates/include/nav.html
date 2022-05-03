@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'main:index' %}">My_Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div style="color: #9fcdff; margin-left: 50px">Сегодня: {% now "d M Y  Время: H:i" %}</div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:products' %}">Каталог <i class="fas fa-shopping-bag"></i>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                    <a class="nav-link"  href="{% url 'ordersapp:orders_list' %}">
+                       Заказы
+                   </a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'auth:profile' user.id %}">
+                            {{ user.first_name | default:'Профиль' }} | Корзина
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'auth:logout' %}">Выйти <i class="fas fa-sign-out-alt"></i></a>
+                    </li>
+                    {% if user.is_superuser or user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'adminapp:index' %}">Админ<i class="fa fa-users"
+                                                                                     aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'auth:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

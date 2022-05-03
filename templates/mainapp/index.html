@@ -1,0 +1,50 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% load main_tags %}
+
+{% block css %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block nav %}
+{% include 'include/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <!-- Page Content -->
+    {% mini_basket %}
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 style="margin-top: 50px;">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <h1 class="mt-5">My_Shop Store</h1>
+                    <p>
+                        Новые образы и лучшие бренды на My_Shop Store.
+                        Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
+                    </p>
+                    <button id="start-purchase-btn" type="button" class="btn btn-lg">
+                        <a id="start-purchase-link" href="{% url 'main:products' %}">
+                            Начать покупки
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
